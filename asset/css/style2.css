@@ -1,0 +1,55 @@
+.main-home {
+  /* margin-left: 250px; harus sesuai lebar sidebar */
+  /* width: calc(100% - 250px); biar responsif */
+  padding: 30px 20px 20px 20px;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+
+.main-content {
+  background-color: #fff;
+  border-radius: 20px;
+}
+
+.container-table h3 {
+    margin: 20px 0;
+}
+
+table {
+  width: 100%; /* tabel auto menyesuaikan lebar */
+  /* border-collapse: collapse; */
+}
+
+.container-table {
+  width: 100%;
+  overflow-x: auto;
+  padding: 10px;
+
+}
+
+/* table {
+  width: 100%;
+  border-collapse: collapse;
+} */
+
+.container-table .table {
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    border: 2px solid #00b4d8;
+}
+
+/* Ketika layar kecil (misalnya max 768px) */
+@media screen and (max-width: 768px) {
+  /* .sidebar {
+    width: 60px; 
+} */
+
+  .main-home {
+    margin-left: 0px;
+  }
+}
+
+/* .nav {
+  background-color: blueviolet;
+} */
