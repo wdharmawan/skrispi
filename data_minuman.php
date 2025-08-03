@@ -27,6 +27,9 @@
                             <th>Kadar Garam (mg)</th>
                             <th>Kadar Lemak (g)</th>
                             <th>Detail</th>
+                            <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] === true): ?>
+                                <th>Aksi</th>
+                            <?php endif; ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -79,7 +82,7 @@
                         while ($data = $result->fetch_assoc()): ?>
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td><?= $data['nama_merk'] ?></td>
+                                <td><?= $data['nama_minuman'] ?></td>
                                 <td><?= format_angka($data['ukuran_porsi']) ?></td>
                                 <td><?= $data['jenis_pemanis'] ?></td>
                                 <td><?= format_angka($data['kadar_gula']) ?></td>
@@ -88,6 +91,15 @@
                                 <td>
                                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal<?= $data['id_minuman'] ?>">Detail</button>
                                 </td>
+
+                                <!-- aksi admin jika sudah  login -->
+                                <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] === true): ?>
+                                    <td>
+                                        <a href="./admin/editMinuman.php?id=<?= $data['id_minuman'] ?>" class="btn btn-warning btn-sm mb-1"><i class="bi bi-pencil-square"></i> Ubah</a>
+                                        <a href="./admin/hapusMinuman.php?id=<?= $data['id_minuman'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?');"><i class="bi bi-trash"></i> Hapus</a>
+                                    </td>
+                                <?php endif; ?>
+
                             </tr>
 
                             <?php
@@ -110,7 +122,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                         </div>
                                         <div class="modal-body text-start">
-                                            <p><strong>Nama:</strong> <?= $data['nama_merk'] ?></p>
+                                            <p><strong>Nama:</strong> <?= $data['nama_minuman'] ?></p>
                                             <p><strong>Kelompok:</strong> <?= $data['kategori_kelompok'] ?></p>
                                             <p><strong>Jenis Pemanis:</strong> <?= $data['jenis_pemanis'] ?></p>
                                             <!-- <p><strong>Ukuran Porsi:</strong> <?= format_angka($data['ukuran_porsi']) ?> ml</p> -->
@@ -138,8 +150,10 @@
 
                 <div class="mt-3 text-center">
                     <?php if ($halamanAktif > 1): ?>
-                        <a href="<?= $baseUrl ?>&page=1"><< </a> &nbsp;
-                                <a href="<?= $baseUrl ?>&page=<?= $halamanAktif - 1 ?>">< </a> &nbsp;
+                        <a href="<?= $baseUrl ?>&page=1">
+                            << </a> &nbsp;
+                                <a href="<?= $baseUrl ?>&page=<?= $halamanAktif - 1 ?>">
+                                    < </a> &nbsp;
                                     <?php endif; ?>
 
                                     <?php for ($i = 1; $i <= $totalHalaman; $i++): ?>
