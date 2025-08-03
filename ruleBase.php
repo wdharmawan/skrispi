@@ -32,7 +32,7 @@ if ($result->num_rows > 0) {
 
         // A. Tentukan Status Keamanan (Aman, Waspada, Risiko Tinggi)
         $status_keamanan = 'Aman'; // Default
-        if (($gula_per_100ml > 12.5) || ($garam_per_100ml > 600) || ($lemak_per_100ml > 5)) {
+        if (($gula_per_100ml > 11.25) || ($garam_per_100ml > 600) || ($lemak_per_100ml > 5)) {
             $status_keamanan = 'Risiko Tinggi';
         } elseif (($gula_per_100ml > 5) || ($garam_per_100ml > 120) || ($lemak_per_100ml > 1.5)) {
             $status_keamanan = 'Perlu Waspada';
@@ -41,7 +41,7 @@ if ($result->num_rows > 0) {
         // B. Tentukan Status Rinci (Gula Tinggi, Garam Tinggi, dll.)
         $pelanggaran_rinci = [];
         if ($gula_per_100ml > 5) { // Batas terendah untuk mulai dianggap "tidak aman"
-            if($gula_per_100ml > 12.5) {$pelanggaran_rinci[] = 'Gula Sangat Tinggi';}
+            if($gula_per_100ml > 11.25) {$pelanggaran_rinci[] = 'Gula Sangat Tinggi';}
             else {$pelanggaran_rinci[] = 'Gula Sedang';}
         }
         if ($garam_per_100ml > 120) {
