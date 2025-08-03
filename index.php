@@ -55,10 +55,19 @@ session_start();
         <a class="nav-link" href="index.php?halaman=data_minuman&kategori=jus">
           <span class="text-dropdown">Jus</span>
         </a>
+        <a class="nav-link" href="index.php?halaman=data_minuman&kategori=bubuk">
+          <span class="text-dropdown">Bubuk</span>
+        </a>
       </div>
       <!-- akhir isi dropdown -->
 
       <a class="nav-link" href="index.php?halaman=artikel"><i class="bi bi-journals"></i> Artikel</a>
+
+      <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] === true): ?>
+        <a class="nav-link" href="./admin/logout.php">Logout Admin</a>
+      <?php else: ?>
+        <a class="nav-link" href="./admin/login.php">Login Admin</a>
+      <?php endif; ?>
 
     </nav>
   </div>
@@ -67,10 +76,10 @@ session_start();
   <nav class="navbar py-2">
     <div class="container-fluid">
       <form class="search-form w-100" role="search" action="index.php" method="GET">
-         <!-- Menentukan halaman tujuan adalah data_minuman -->
+        <!-- Menentukan halaman tujuan adalah data_minuman -->
         <input type="hidden" name="halaman" value="data_minuman">
 
-         <!-- Input pencarian -->
+        <!-- Input pencarian -->
         <input class="form-control" type="search" name="search" placeholder="Cari minuman..." aria-label="Search">
 
         <!-- Tombol submit -->
