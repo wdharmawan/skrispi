@@ -15,6 +15,12 @@
     margin: 20px 0;
 }
 
+#startHome {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url('../image/background_home\ .png');
+  color: #fff;
+}
+
 table {
   width: 100%; /* tabel auto menyesuaikan lebar */
   /* border-collapse: collapse; */
@@ -53,3 +59,5 @@ table {
 /* .nav {
   background-color: blueviolet;
 } */
+
+
