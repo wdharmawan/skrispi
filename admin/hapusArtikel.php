@@ -12,18 +12,18 @@ session_start();
 include 'koneksi.php'; // Pastikan path ke file koneksi benar
 
 // Cek login admin
-if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
-    header("Location: login.php");
-    exit;
-}
+    if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
+        header("Location: login.php");
+        exit;
+    }
 
 // Ambil ID
 $id = $_GET['id'] ?? 0;
 
 if ($id > 0) {
-    $hapus = mysqli_query($koneksi, "DELETE FROM data_minuman WHERE id_minuman = $id");
+    $hapus = mysqli_query($koneksi, "DELETE FROM data_artikel WHERE id_artikel = $id");
     if ($hapus) {
-        echo "<script>alert('Data berhasil dihapus'); window.location='../index.php?halaman=data_minuman';</script>";
+        echo "<script>alert('Data berhasil dihapus'); window.location='../artikel.php';</script>";
     } else {
         echo "Gagal menghapus data: " . mysqli_error($koneksi);
     }

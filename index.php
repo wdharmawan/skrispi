@@ -49,6 +49,9 @@ session_start();
         <a class="nav-link" href="index.php?halaman=data_minuman&kategori=kopi">
           <span class="text-dropdown">Kopi</span>
         </a>
+        <a class="nav-link" href="index.php?halaman=data_minuman&kategori=susu">
+          <span class="text-dropdown">Susu</span>
+        </a>
         <a class="nav-link" href="index.php?halaman=data_minuman&kategori=karbonasi">
           <span class="text-dropdown">Soda</span>
         </a>

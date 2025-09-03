@@ -1,3 +1,22 @@
+<?php
+include "./admin/koneksi.php"; // koneksi ke database
+
+// Cek apakah admin sudah login
+if (!isset($_SESSION['admin'])) {
+    // header("Location: login.php");
+    // exit();
+}
+
+// Ambil data statistik
+$totalMinuman = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as total FROM data_minuman"))['total'];
+$totalArtikel = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as total FROM data_artikel"))['total'];
+
+$jumlahMerah = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as total FROM data_minuman WHERE status_keamanan = 'Risiko Tinggi'"))['total'];
+$jumlahKuning = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as total FROM data_minuman WHERE status_keamanan = 'Perlu Waspada'"))['total'];
+$jumlahHijau = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as total FROM data_minuman WHERE status_keamanan = 'Aman'"))['total'];
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +39,49 @@
             <!-- <h1>HOME</h1> -->
         </div>
 
-        <section class="startHome mb-5">
+        <!-- Mini Admin Dashboard -->
+        <?php if (isset($_SESSION['admin'])) : ?>
+            <div class="container py-4">
+                <h2 class="mb-4"><i class="bi bi-speedometer2"></i> Dashboard Admin</h2>
+
+                <div class="row g-4">
+                    <!-- Total Data Minuman -->
+                    <div class="col-md-4">
+                        <div class="card border-primary shadow">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary">Total Data Minuman</h5>
+                                <p class="card-text display-6"><?= $totalMinuman ?></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Jumlah Artikel -->
+                    <div class="col-md-4">
+                        <div class="card border-success shadow">
+                            <div class="card-body">
+                                <h5 class="card-title text-success">Total Artikel</h5>
+                                <p class="card-text display-6"><?= $totalArtikel ?></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Distribusi Keamanan -->
+                    <div class="col-md-4">
+                        <div class="card border-warning shadow">
+                            <div class="card-body">
+                                <h5 class="card-title text-warning">Distribusi Keamanan Minuman</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">🔴 Resiko Tinggi: <strong><?= $jumlahMerah ?></strong></li>
+                                    <li class="list-group-item">🟡 Perlu Waspada: <strong><?= $jumlahKuning ?></strong></li>
+                                    <li class="list-group-item">🟢 Aman: <strong><?= $jumlahHijau ?></strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <section class="startHome mb-5">
                 <!-- <h2>Sambutan Halaman Home</h2> -->
                 <p>
                     SweetCheck hadir untuk membantu Anda mengenali dan memantau konsumsi minuman berpemanis. Aplikasi ini
@@ -75,7 +136,8 @@
                     kardiovaskular di masyarakat.
                 </p>
             </section>
-    </div>
+            </div>
 
 </body>
+
 </html>
